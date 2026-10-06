@@ -1,33 +1,42 @@
 #include <stdio.h>
 
-/* protótipos */
+/* PROTÓTIPOS */
 void trocar(int *a, int *b);
 void calcularSoma(int a, int b, int *soma);
 void calcularProduto(int a, int b, int *produto);
 void determinarMaiorMenor(int a, int b, int *maior, int *menor);
-void mostrarResultados(int a, int b, int soma, int produto, int maior, int menor);
+void mediaTres(int a, int b, int c, float *media);
 
-/* funções adicionais */
+void mostrarResultados(int a, int b, int soma,
+                       int produto, int maior, int menor);
+
 void incrementar(int *x);
-void contarMaioresQueMedia(int *v, int n, float media, int *qtdMaiores);
+void contarMaioresQueMedia(int *v, int n,
+                           float media, int *qtdMaiores);
 
 
 int main(void) {
 
-    /* declaração das variáveis */
-    int a, b, soma, produto, maior, menor;
-    int valores[2];
+    /* DECLARAÇÃO DAS VARIÁVEIS */
+    int a, b, c;
+    int soma, produto, maior, menor;
+    int valores[3];
     int qtdMaiores;
     float media;
 
-    /* leitura */
+
+    /* LEITURA */
     printf("Digite o valor de a: ");
     scanf("%d", &a);
 
     printf("Digite o valor de b: ");
     scanf("%d", &b);
 
-    /* chamadas às funções */
+    printf("Digite o valor de c: ");
+    scanf("%d", &c);
+
+
+    /* FUNÇÕES PRINCIPAIS */
     trocar(&a, &b);
 
     calcularSoma(a, b, &soma);
@@ -36,24 +45,27 @@ int main(void) {
 
     determinarMaiorMenor(a, b, &maior, &menor);
 
-    mostrarResultados(a, b, soma, produto, maior, menor);
+    mediaTres(a, b, c, &media);
 
 
-    /* funções adicionais */
-
-    /* coloca a e b dentro de um vetor */
+    /* VETOR COM OS VALORES */
     valores[0] = a;
     valores[1] = b;
+    valores[2] = c;
 
-    /* calcula a média */
-    media = soma / 2.0;
 
-    /* conta quantos são maiores que a média */
-    contarMaioresQueMedia(valores, 2, media, &qtdMaiores);
+    /* FUNÇÃO ADICIONAL */
+    contarMaioresQueMedia(valores, 3, media, &qtdMaiores);
 
+
+    /* RESULTADOS */
+    mostrarResultados(a, b, soma, produto, maior, menor);
+
+    printf("C: %d\n", c);
     printf("Media: %.2f\n", media);
     printf("Quantidade de valores maiores que a media: %d\n",
            qtdMaiores);
+
 
     return 0;
 }
@@ -62,6 +74,7 @@ int main(void) {
 /* ================= FUNÇÕES PRINCIPAIS ================= */
 
 void trocar(int *a, int *b) {
+
     int aux;
 
     aux = *a;
@@ -71,24 +84,38 @@ void trocar(int *a, int *b) {
 
 
 void calcularSoma(int a, int b, int *soma) {
+
     *soma = a + b;
 }
 
 
 void calcularProduto(int a, int b, int *produto) {
+
     *produto = a * b;
 }
 
 
-void determinarMaiorMenor(int a, int b, int *maior, int *menor) {
+void determinarMaiorMenor(int a, int b,
+                          int *maior, int *menor) {
 
     if (a >= b) {
+
         *maior = a;
         *menor = b;
+
     } else {
+
         *maior = b;
         *menor = a;
     }
+}
+
+
+/* MÉDIA DE A, B E C */
+
+void mediaTres(int a, int b, int c, float *media) {
+
+    *media = (a + b + c) / 3.0;
 }
 
 
@@ -106,13 +133,17 @@ void mostrarResultados(int a, int b, int soma,
 
 /* ================= FUNÇÕES ADICIONAIS ================= */
 
-/* incrementa o valor recebido */
+
+/* INCREMENTAR */
+
 void incrementar(int *x) {
+
     *x = *x + 1;
 }
 
 
-/* conta elementos maiores que a média */
+/* CONTAR VALORES MAIORES QUE A MÉDIA */
+
 void contarMaioresQueMedia(int *v, int n,
                            float media, int *qtdMaiores) {
 
@@ -121,8 +152,8 @@ void contarMaioresQueMedia(int *v, int n,
     for (int i = 0; i < n; i++) {
 
         if (v[i] > media) {
+
             incrementar(qtdMaiores);
         }
-
     }
 }
